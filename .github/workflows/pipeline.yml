@@ -35,15 +35,16 @@ jobs:
         # Ensure Poetry is in PATH
         poetry --version
         poetry install
+        poetry shell
 
     - name: Run Pytest
       run: |
         # Ensure Poetry is in PATH
         poetry --version
-        pytest life_expectancy
+        poetry pytest life_expectancy
 
     - name: Run Pylint
       run: |
         # Ensure Poetry is in PATH
         poetry --version
-        pylint life_expectancy/**/*.py
+        poetry pylint life_expectancy/**/*.py
