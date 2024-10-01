@@ -2,6 +2,8 @@ from pathlib import Path
 import argparse
 import re
 import pandas as pd
+from typing import Optional
+from life_expectancy.enums import Region
 
 desired_order = ["unit", "sex", "age", "region", "year", "value"]
 
@@ -27,7 +29,7 @@ def clean_invalid_characters(value):
     return value
 
 
-def clean_data(df, country="PT"):
+def clean_data(df, country: Optional[Region] = Region.PT):
     """Cleans the data and filters by the specified country."""
     try:
         df_long = df.melt(id_vars=df.columns[0], var_name="year", value_name="value")
