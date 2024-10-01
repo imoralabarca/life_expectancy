@@ -1,0 +1,44 @@
+[project]
+authors = [
+  { name = "Isabel Mora", email = "isabel.labarca@daredata.engineering" }
+]
+name = "life_expectancy"
+
+[tool.poetry]
+name = "life_expectancy"
+version = "0.1.0"
+description = "Assignment of the Foundations Learning Pod"
+authors = ["imoralabarca <isabel.labarca@parceiros.nos.pt>"]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+pandas = "^2.2.2"
+pytest = "^8.3.1"
+pylint = "^3.2.6"
+pytest-cov = "^5.0.0"
+toml = "^0.10.2"
+setuptools = "^75.1.0"
+
+[tool.poetry.dev-dependencies]
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.setuptools]
+packages = ["life_expectancy"]
+
+[tool.coverage.run]
+omit = [
+    "*/conftest.py", "*/test*", # omit test files
+]
+
+[tool.coverage.report]
+fail_under = 80
+
+
+[tool.pylint."messages control"]
+disable = [
+   "missing-module-docstring",
+   "missing-function-docstring"
+]
