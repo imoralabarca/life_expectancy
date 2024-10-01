@@ -1,4 +1,3 @@
-import pytest
 from life_expectancy.enums import Region
 
 def test_actual_countries():
@@ -12,3 +11,4 @@ def test_actual_countries():
     
     # Assert that the actual countries match the expected countries
     assert actual_countries == expected_countries
+    
