@@ -1,7 +1,6 @@
 """Tests for the cleaning module"""
-
-import pandas as pd
 from pathlib import Path
+import pandas as pd
 from life_expectancy.cleaning import load_data, clean_data, save_data
 
 input_path = Path(__file__).parent.parent / "data" / "eu_life_expectancy_raw.tsv"
