@@ -3,7 +3,7 @@ import argparse
 import re
 import pandas as pd
 from typing import Optional
-from enums import Region
+from life_expectancy.enums import Region
 
 desired_order = ["unit", "sex", "age", "region", "year", "value"]
 
