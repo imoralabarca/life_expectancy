@@ -9,6 +9,6 @@ def test_actual_countries():
     non_country_regions = {"EU28", "EFTA", "EEA", "EA", "EU27_2020", "EU27_2007",
                            "EEA31", "EEA30_2007", "EA19", "EA18", "DE_TOT"}
     expected_countries = [region for region in Region if region.name not in non_country_regions]
-    
+  
     # Assert that the actual countries match the expected countries
     assert actual_countries == expected_countries
