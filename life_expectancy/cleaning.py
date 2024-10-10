@@ -1,12 +1,23 @@
-from pathlib import Path
+import os
 import argparse
 import re
-import pandas as pd
+from pathlib import Path
 from typing import Optional
+import pandas as pd
 from life_expectancy.enums import Region
+from life_expectancy.strategies import CSVDataStrategy, JSONDataStrategy, DataStrategy
 
 desired_order = ["unit", "sex", "age", "region", "year", "value"]
 
+def get_data_strategy(file_path: str) -> DataStrategy:
+    """Select the appropriate data strategy based on the file extension."""
+    _, file_extension = os.path.splitext(file_path)
+    if file_extension == '.csv':
+        return CSVDataStrategy()
+    elif file_extension == '.json':
+        return JSONDataStrategy()
+    else:
+        raise ValueError(f"Unsupported file format: {file_extension}")
 
 def load_data(file_path):
     """Loads the data from a TSV file and returns a DataFrame."""
@@ -73,15 +84,16 @@ def main():
     args = parser.parse_args()
 
     # File paths
-    data_path = Path(__file__).parent / "data" / "eu_life_expectancy_raw.tsv"
-    output_path = Path(__file__).parent / "data" / "pt_life_expectancy.csv"
+    data_path = Path(__file__).parent / "data" / "eurostat_life_expect.json"
+    output_path = Path(__file__).parent / "data" / f'{args.country.lower()}_life_expectancy_cleaned.csv'
 
-    # Load, clean, and save data
-    df = load_data(data_path)
+    # Load, clean, and save data using appropriate strategy
+    strategy = get_data_strategy(data_path)
+    df = strategy.load_data(data_path)
     if df is not None:
         cleaned_data = clean_data(df, country=args.country)
         if cleaned_data is not None:
-            save_data(cleaned_data, output_path)
+            strategy.save_data(cleaned_data, output_path)
 
 
 if __name__ == "__main__":
